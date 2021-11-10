@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+
+      background: #fafafc;
+    }
+
+    main {
+      height: 100vh;
+      width: 100vw;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    form {
+      width: 20rem;
+      height: 22rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;      
+      
+    }
+
+    form div:first-child {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;      
+    }
+
+    form div:first-child label {
+      width: 16rem;
+      height: 18rem;
+
+      background: linear-gradient(top, #f9f9f9, #e3e3e3);
+
+      border: 1px solid #eee;
+      border-radius: 0.5rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;  
+    }
+
+    #file {
+      display: none;
+    }
+
+    form div:last-child button {
+      width: 16rem;
+      height: 2rem;
+
+      margin-top: 0.5rem;
+      border-radius: 0.5rem;
+      border: 1px solid #d3d3d3;
+
+      cursor: pointer;
+    }
+
+    .chat {
+      width: 20rem;
+      height: 22rem;
+
+      padding: 0.5rem;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #eee;
+      border-radius: 0.5rem;
+    }
+
+    .chat div#messagesList {
+      width: 100%;
+      overflow-y: scroll;
+      height: 92%;
+
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat div#messagesList::-webkit-scrollbar {
+      display: none;
+    }
+
+    .chat input#user_message {
+      width: 100%;
+      height: 8%;
+      margin-top: auto;
+      border-radius: 0.5rem;
+      border: 1px solid #d3d3d3;
+    }
+
+    .message {
+      width: 100%;
+      line-break: auto;
+      height: fit-content;
+      min-height: 1.5rem;
+      
+      margin-top: 0.5rem;
+      margin-left: auto;      
+    }
+
+    .user {
+      text-align: right;
+      position: relative;
+    }    
+
+    .bot {
+      text-align: left;
+      position: relative;
+    }
+
+    .user::before { 
+      content: '';
+      position: absolute;
+      bottom: 0;
+      background: #eee;
+      width: 40%;
+      height: 2px;     
+      right: 0;      
+    }
+
+    .bot::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      background: #eee;
+      width: 40%;
+      height: 2px;      
+      left: 0;      
+    }
+
+  </style>
+
+</head>
+<body>
+  
+  <main>
+    <form id="form" enctype="multipart/form-data">
+      <div>
+        <label for="file" id="fileLabel">          
+          Escolha um arquivo de treino
+        </label>
+        <input type="file" id="file" name="file" accept=".txt">
+      </div>
+      <div>
+        <button>Enviar</button>
+      </div>
+    </form>    
+
+    <div class="chat">
+      <div id="messagesList"></div>
+      <input type="text" name="user_message" id="user_message">
+    </div>
+  </main>
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+  <script type="text/javascript" charset="utf-8">
+    var socket = io('http://localhost:5000');    
+    const messages = [];
+
+    socket.on('message', data => {
+      addMessage(JSON.parse(data).message, 'bot');
+    });
+
+    document.getElementById("user_message").addEventListener("keypress", (e) => {
+      if (e.key === "Enter") {
+        const message = e.target.value;        
+
+        addMessage(message, 'user')
+        
+        e.target.value = "";
+
+        const data = {
+          message,
+        };
+
+        socket.emit("message", data);
+      }
+    });
+
+    function addMessage(msg, from) {
+      const messagesDiv = document.getElementById("messagesList");
+
+      messagesDiv.innerHTML += `
+        <div class="message ${from}"> ${msg} </div>
+      `
+
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    }
+
+    document.getElementById("form").addEventListener("change", (e) => {
+      const fileName = e.target.files[0].name;
+      document.getElementById("fileLabel").innerText = fileName;
+    });
+
+    document.getElementById("form").addEventListener("submit", (e) => {
+      e.preventDefault();
+
+      console.log(e);
+
+      fetch('http://localhost:5000/train', {
+        method: "post",         
+        headers: {
+          "Accept": "multipart/form-data"
+        },        
+        body: new FormData(e.srcElement) 
+      })
+    });
+  </script>
+</body>
+</html>
