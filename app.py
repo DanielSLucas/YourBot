@@ -3,12 +3,18 @@ from flask_socketio import SocketIO, emit
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 # import re
+from flask_cors import CORS
 import os
 import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+CORS(app, resource={
+  r"/*":{
+    "origins":"*"
+  }
+})
 
 bot = ChatBot(
   'Chatbot',

@@ -1,5 +1,6 @@
 Flask>=1.0.0
 flask-socketio
+flask-cors
 simple-websocket
 ChatterBot==1.1.0
 spacy==2.3.2
