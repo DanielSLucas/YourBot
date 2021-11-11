@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
+# import re
 import os
 import json
 
@@ -32,7 +33,15 @@ def hello_world():
     f.save('./tmp/trainningFile.txt')
     fileContent = open('./tmp/trainningFile.txt').read()    
 
-    treino = trainer.train(fileContent.split('\n'))    
+    trainninList = fileContent.split('\n')
+
+
+    # regex = "(\[([0-9]{2}\/[0-9]{2}\/[0-9]{4}){1} (([0-1]{1})?[0-9]{1}\:[0-5]{1}[0-9]{1}\:[0-5]{1}[0-9]{1}){1} ((P|A)M){1}] .*:)"
+    # print("#####    Tirou isso: " + re.sub(regex, "", trainninList[0]) +"Ficou isso:" + trainninList[0])
+    # for msg in trainninList:
+    #   re.sub(regex, "", msg)
+
+    treino = trainer.train(trainninList)    
 
     os.remove('./tmp/trainningFile.txt')
   return {
