@@ -26,7 +26,7 @@ const appearFromTop = keyframes`
 
 export const ContentWrapper = styled.main`
   position: relative;
-  max-width: 1100px;
+  max-width: 1375px;
 
   display: flex;
   flex-direction: column;
@@ -41,8 +41,8 @@ export const ContentWrapper = styled.main`
     left: 0;
 
     svg {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.875rem;
+      height: 1.875rem;
     }
   }
 
@@ -52,32 +52,31 @@ export const ContentWrapper = styled.main`
     justify-content: center;
 
     h1 {
-      font-size: 5rem;
+      color: ${props => props.theme.colors.primary};
+      font-size: 6.25rem;
       font-family: 'Red Hat Mono', monospace;
       font-weight: bold;
     }
 
     svg {
-      height: 5rem;
-      width: 5rem;
+      height: 6.25rem;
+      width: 6.25rem;
       margin-right: 0.5rem;
     }
   }
 `;
 
 export const Chat = styled.div`
-  width: 32rem;
-  height: 34rem;
+  width: 40rem;
+  height: 42.5rem;
 
-  border: 1px solid #d3d3d3;
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 0.25rem;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
-  /* box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.25); */
 
   & > div {
     width: 97%;
@@ -103,30 +102,50 @@ export const Chat = styled.div`
     justify-content: center;
 
     input {
+      padding: 0.5rem;
       width: 100%;
-      height: 2rem;
+      height: 2.5rem;
+      font-size: 1.25rem;
+
+      border: 1px solid ${props => props.theme.colors.border};
+
+      border-radius: 0.25rem;
+
+      background: ${props => props.theme.colors.lighterBackground};
+      color: ${props => props.theme.colors.text};
     }
 
     button {
-      width: 2rem;
-      height: 2rem;
+      background: ${props => props.theme.colors.secondary};
+
+      width: 2.5rem;
+      height: 2.5rem;
 
       display: flex;
       align-items: center;
       justify-content: center;
+
+      border: 1px solid ${props => props.theme.colors.border};
+      border-radius: 0.25rem;
+
+      svg {
+        color: ${props => props.theme.colors.text};
+        width: 1.25rem;
+        height: 1.25rem;
+      }
     }
   }
 `;
 
 export const Message = styled.div<MessageProps>`
-  font-size: 1.125rem;
+  font-size: 1.40625rem;
   width: fit-content;
   height: fit-content;
 
   margin-top: 1rem;
   padding: 0.5rem;
 
-  border: 1px solid #d3d3d3;
+  border: 1px solid ${props => props.theme.colors.border};
   border-radius: 0.5rem;
 
   display: flex;
@@ -135,7 +154,8 @@ export const Message = styled.div<MessageProps>`
   align-self: ${props => (props.from === 'user' ? 'flex-end' : 'flex-start')};
 
   span {
-    font-size: 0.7rem;
+    color: ${props => props.theme.colors.primary};
+    font-size: 0.875rem;
     align-self: ${props => (props.from === 'user' ? 'flex-end' : 'flex-start')};
   }
 `;

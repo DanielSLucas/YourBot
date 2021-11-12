@@ -2,6 +2,7 @@
 import React, {
   FormEvent,
   useCallback,
+  useContext,
   useEffect,
   useRef,
   useState,
@@ -9,6 +10,7 @@ import React, {
 import { FiArrowLeft, FiSend } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import { ThemeContext } from 'styled-components';
 
 import { Container, ContentWrapper, Chat, Message } from './styles';
 
@@ -20,6 +22,7 @@ type IMessage = {
 const socket = io('http://localhost:5000');
 
 const Bot: React.FC = () => {
+  const theme = useContext(ThemeContext);
   const chatDivRef = useRef<HTMLDivElement>(null);
   const [messages, setMessages] = useState<IMessage[]>([]);
   const [userMessage, setUserMessage] = useState('');
@@ -72,25 +75,31 @@ const Bot: React.FC = () => {
           >
             <path
               d="M20.9288 7.27258H4.9288C3.82423 7.27258 2.9288 8.16801 2.9288 9.27258V20.2726C2.9288 21.3772 3.82423 22.2726 4.9288 22.2726H20.9288C22.0334 22.2726 22.9288 21.3772 22.9288 20.2726V9.27258C22.9288 8.16801 22.0334 7.27258 20.9288 7.27258Z"
-              stroke="black"
+              stroke={theme.colors.primary}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M17.9288 2.27258L12.9288 7.27258L7.9288 2.27258"
-              stroke="black"
+              stroke={theme.colors.primary}
               strokeWidth="2"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-            <circle cx="9" cy="13" r="1" fill="black" />
-            <circle cx="9" cy="13" r="1" fill="black" />
-            <circle cx="9" cy="13" r="1" fill="black" />
-            <circle cx="17" cy="13" r="1" fill="black" />
-            <circle cx="17" cy="13" r="1" fill="black" />
-            <circle cx="17" cy="13" r="1" fill="black" />
-            <line x1="9" y1="17.5" x2="17" y2="17.5" stroke="black" />
+            <circle cx="9" cy="13" r="1" fill={theme.colors.primary} />
+            <circle cx="9" cy="13" r="1" fill={theme.colors.primary} />
+            <circle cx="9" cy="13" r="1" fill={theme.colors.primary} />
+            <circle cx="17" cy="13" r="1" fill={theme.colors.primary} />
+            <circle cx="17" cy="13" r="1" fill={theme.colors.primary} />
+            <circle cx="17" cy="13" r="1" fill={theme.colors.primary} />
+            <line
+              x1="9"
+              y1="17.5"
+              x2="17"
+              y2="17.5"
+              stroke={theme.colors.primary}
+            />
           </svg>
           <h1>YourBot</h1>
         </header>
