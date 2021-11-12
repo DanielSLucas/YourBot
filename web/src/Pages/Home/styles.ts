@@ -33,19 +33,26 @@ export const HorizontalDivider = styled.div`
 
 export const Intro = styled.section`
   margin-right: 1rem;
-  h1 {
-    font-size: 5rem;
-    font-family: 'Red Hat Mono', monospace;
-    font-weight: bold;
-  }
+  header {
+    & > div {
+      display: flex;
+      align-items: center;
 
-  p {
-    width: 34rem;
-  }
+      h1 {
+        font-size: 5rem;
+        font-family: 'Red Hat Mono', monospace;
+        font-weight: bold;
+      }
+    }
 
-  & > p {
-    margin-top: 2rem;
-    font-size: 2rem;
+    p {
+      width: 34rem;
+    }
+
+    & > p {
+      margin-top: 2rem;
+      font-size: 2rem;
+    }
   }
 
   div {
@@ -80,6 +87,12 @@ export const UploadArea = styled.section`
 
   padding: 2rem;
 
+  svg {
+    height: 5rem;
+    width: 5rem;
+    margin-bottom: 2rem;
+  }
+
   h2 {
     font-size: 2rem;
   }
@@ -100,11 +113,28 @@ export const UploadArea = styled.section`
     border-radius: 0.5rem;
   }
 
+  div p {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 2rem;
+      height: 2rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+
   button {
     width: 100%;
     height: 2rem;
 
     border-radius: 0.5rem;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `;
 
@@ -114,9 +144,9 @@ const spin = keyframes`
 `;
 
 export const Loader = styled.div`
-  border: 2px solid ${props => props.theme.colors.border};
+  border: 2px solid #d3d3d3;
   border-radius: 50%;
-  border-top: 2px solid ${props => props.theme.colors.secondary};
+  border-top: 2px solid #efefef;
   width: 1.5rem;
   height: 1.5rem;
   -webkit-animation: ${spin} 2s linear infinite; /* Safari */

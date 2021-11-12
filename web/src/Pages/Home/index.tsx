@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import { FiFileText } from 'react-icons/fi';
 import { useDropzone } from 'react-dropzone';
 import { useNavigate } from 'react-router-dom';
 
@@ -38,7 +39,6 @@ const Home: React.FC = () => {
       .then(() => {
         setIsLoading(false);
         navigate('/bot', { replace: false });
-        window.location.reload();
       });
   }, [navigate, file]);
 
@@ -46,12 +46,17 @@ const Home: React.FC = () => {
     <Container>
       <ContentWrapper>
         <Intro>
-          <h1>YourBot</h1>
-          <p>
-            Já pensou em treinar seu próprio bot?
-            <br />
-            Aqui você pode!
-          </p>
+          <header>
+            <div>
+              <h1>YourBot</h1>
+            </div>
+
+            <p>
+              Já pensou em treinar seu próprio bot?
+              <br />
+              Aqui você pode!
+            </p>
+          </header>
 
           <HorizontalDivider />
 
@@ -77,18 +82,51 @@ const Home: React.FC = () => {
         <VerticalDivider />
 
         <UploadArea>
+          <svg
+            width="25"
+            height="25"
+            viewBox="0 0 25 25"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M20.9288 7.27258H4.9288C3.82423 7.27258 2.9288 8.16801 2.9288 9.27258V20.2726C2.9288 21.3772 3.82423 22.2726 4.9288 22.2726H20.9288C22.0334 22.2726 22.9288 21.3772 22.9288 20.2726V9.27258C22.9288 8.16801 22.0334 7.27258 20.9288 7.27258Z"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M17.9288 2.27258L12.9288 7.27258L7.9288 2.27258"
+              stroke="black"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <circle cx="9" cy="13" r="1" fill="black" />
+            <circle cx="9" cy="13" r="1" fill="black" />
+            <circle cx="9" cy="13" r="1" fill="black" />
+            <circle cx="17" cy="13" r="1" fill="black" />
+            <circle cx="17" cy="13" r="1" fill="black" />
+            <circle cx="17" cy="13" r="1" fill="black" />
+            <line x1="9" y1="17.5" x2="17" y2="17.5" stroke="black" />
+          </svg>
           <h2>Arquivo de treino</h2>
           <div {...getRootProps()}>
             <input {...getInputProps()} multiple={false} />
-            {isDragActive ? (
-              <p>Solte o arquivo aqui...</p>
-            ) : (
-              <p>
-                {!file.name
-                  ? 'Solte o arquivo aqui, ou clique para selecionar o arquivo'
-                  : file.name}
-              </p>
-            )}
+
+            <p>
+              <FiFileText />
+              {isDragActive ? (
+                <>Solte o arquivo aqui...</>
+              ) : (
+                <>
+                  {!file.name
+                    ? 'Solte o arquivo aqui, ou clique para selecionar o arquivo'
+                    : file.name}
+                </>
+              )}
+            </p>
           </div>
           <button type="button" disabled={!file.name} onClick={handleClick}>
             {' '}
