@@ -2,13 +2,11 @@ from flask import Flask, render_template, request
 from flask_socketio import SocketIO, emit
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
-# import re
 from flask_cors import CORS
 import os
 import json
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app, cors_allowed_origins="*")
 CORS(app, resource={
   r"/*":{
@@ -25,7 +23,7 @@ trainer = ListTrainer(bot)
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+  return render_template("index.html")
 
 @socketio.on('message')
 def handle_message(data):
@@ -41,13 +39,7 @@ def hello_world():
 
     trainninList = fileContent.split('\n')
 
-
-    # regex = "(\[([0-9]{2}\/[0-9]{2}\/[0-9]{4}){1} (([0-1]{1})?[0-9]{1}\:[0-5]{1}[0-9]{1}\:[0-5]{1}[0-9]{1}){1} ((P|A)M){1}] .*:)"
-    # print("#####    Tirou isso: " + re.sub(regex, "", trainninList[0]) +"Ficou isso:" + trainninList[0])
-    # for msg in trainninList:
-    #   re.sub(regex, "", msg)
-
-    treino = trainer.train(trainninList)    
+    trainer.train(trainninList)    
 
     os.remove('./tmp/trainningFile.txt')
   return {
