@@ -20,9 +20,13 @@ Na pasta web temos o front-end do projeto criado com [vite](https://vitejs.dev) 
 
   Introdução ao site e formulário de upload do arquivo de treinamento.
 
+  ![home](./home.png)
+
 - Página `Bot`
 
   Página utilizad para conversar com o chatbot.
+
+  ![bot](./bot.png)
 
 ## Como executar o projeto
 
