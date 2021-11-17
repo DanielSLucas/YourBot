@@ -1,12 +1,13 @@
 const defaultTheme = {
+  name: 'dark',
   colors: {
     text: '#EFEFEF',
 
-    primary: '#FFC947',
-    secondary: '#185ADB',
+    primary: '#00E6DE',
+    secondary: '#00ADB5',
 
-    background: '#0A1931',
-    lighterBackground: 'rgba(10, 25, 49, 0.5)',
+    background: '#222831',
+    lighterBackground: '#393e46',
 
     border: '#d3d3d3',
     lighterBorder: '#eee',

@@ -1,4 +1,19 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
+export const Button = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  border: none;
+  background: none;
+
+  svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: ${props => props.theme.colors.text};
+  }
+`;
 
 export default createGlobalStyle`
   html {
@@ -10,6 +25,8 @@ export default createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
     outline: 0;
+
+    transition: background-color 0.4s, color 0.1s !important;
   }
 
   body {

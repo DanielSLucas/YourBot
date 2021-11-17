@@ -52,7 +52,7 @@ export const ContentWrapper = styled.main`
     justify-content: center;
 
     h1 {
-      color: ${props => props.theme.colors.primary};
+      color: ${props => props.theme.colors.text};
       font-size: 6.25rem;
       font-family: 'Red Hat Mono', monospace;
       font-weight: bold;

@@ -1,4 +1,5 @@
 const defaultTheme = {
+  name: 'default',
   colors: {
     text: '#2c2c2c',
 
