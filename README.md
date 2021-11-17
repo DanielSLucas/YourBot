@@ -1,4 +1,4 @@
-# YourChatBot
+# YourBot
 
 Treine seu chatbot com um arquivo de texto (.txt) e converse com ele.
 
